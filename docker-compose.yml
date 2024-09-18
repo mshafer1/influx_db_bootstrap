@@ -1,0 +1,17 @@
+# loosely based on https://community.influxdata.com/t/docker-compose-example/25627/2
+name: influxdb
+services:
+  influxdb:
+    image: influxdb:2
+    volumes:
+      - $PWD/data:/var/lib/influxdb2
+      - $PWD/config:/etc/influxdb2
+      - $PWD/scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 8086:8086
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - V1_DB_NAME=v1-db
+      - V1_RP_NAME=v1-rp
+      - V1_AUTH_USERNAME=v1-user
+      - TZ=America/Chicago
